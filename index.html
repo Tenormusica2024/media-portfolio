@@ -370,14 +370,14 @@
                 </div>
             </div>
 
-            <div class="media-card sample-card">
+            <div class="media-card">
                 <div class="media-wrapper">
-                    <img src="https://via.placeholder.com/640x360/6b5d4f/f5f5f5?text=Sample+Video+Thumbnail" alt="Sample Video">
+                    <video src="videos/kling_ai_video_sample.mp4" preload="metadata"></video>
                     <button class="delete-btn" onclick="deleteMedia(this)">×</button>
                 </div>
                 <div class="media-info">
-                    <div class="media-title">サンプル動画</div>
-                    <div class="media-description">ここに動画の説明を追加できます</div>
+                    <div class="media-title">Kling AI Generated Video</div>
+                    <div class="media-description">AI生成動画作品 - Image to Video技術による映像制作</div>
                     <span class="media-type-badge">動画</span>
                 </div>
             </div>
@@ -475,6 +475,25 @@
             if (e.key === 'Escape') {
                 closeModal();
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const staticCards = document.querySelectorAll('.media-card:not(.sample-card)');
+            staticCards.forEach(card => {
+                const wrapper = card.querySelector('.media-wrapper');
+                const video = wrapper.querySelector('video');
+                const img = wrapper.querySelector('img');
+                
+                wrapper.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('delete-btn')) {
+                        if (video) {
+                            openModal(video.getAttribute('src'), 'video');
+                        } else if (img) {
+                            openModal(img.getAttribute('src'), 'image');
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
